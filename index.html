@@ -282,16 +282,28 @@
     .section-header p { color: var(--muted); max-width: 520px; }
 
     /* Responsive grids — defined here so they reliably override inline styles */
+    .hero-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+    .hero-photo-col > div { max-width: 280px; margin: 0 auto; }
     .services-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
     .results-stats-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .case-study-detail-grid { display: grid; grid-template-columns: 1fr !important; gap: 10px; }
     .step-connector-row { display: none; }
     .about-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
+    .about-timeline { padding-left: 36px; }
     .case-study-logo-wrap { margin-bottom: 16px; }
+    /* Mobile-only overrides */
+    @media (max-width: 767px) {
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
     @media (min-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr 1fr; gap: 72px; padding-left: 16px; padding-right: 16px; }
+      .hero-photo-col > div { max-width: 370px; margin: 0; }
       .services-grid { grid-template-columns: repeat(3, 1fr); }
       .results-stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .case-study-detail-grid { grid-template-columns: 1fr 1fr !important; gap: 12px; }
       .step-connector-row { display: block; }
       .about-grid { grid-template-columns: 1fr 1fr; gap: 72px; }
+      .about-timeline { padding-left: 24px; }
       .case-study-logo-wrap { position: absolute; top: 24px; right: 24px; margin-bottom: 0; }
       .case-study-logo-wrap img { height: 120px; }
     }
@@ -339,7 +351,7 @@
   <div style="position:absolute;top:15%;right:-5%;width:500px;height:500px;background:radial-gradient(circle,rgba(56,189,248,0.04) 0%,transparent 65%);pointer-events:none;"></div>
   <div style="position:absolute;bottom:10%;left:30%;width:400px;height:400px;background:radial-gradient(circle,rgba(6,182,212,0.04) 0%,transparent 65%);pointer-events:none;"></div>
 
-  <div style="max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr;gap:48px;align-items:center;position:relative;z-index:1;">
+  <div class="hero-grid" style="max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1;">
     <div>
       <div class="pill" style="margin-bottom:28px;background:transparent;border:none;padding:0;">
         <span class="pill-dot"></span>
@@ -372,7 +384,7 @@
       </div>
     </div>
 
-    <div style="position:relative;display:flex;justify-content:center;">
+    <div class="hero-photo-col" style="position:relative;display:flex;justify-content:center;">
       <div style="position:relative;width:100%;max-width:370px;">
         <div style="position:absolute;inset:-24px;background:radial-gradient(ellipse at 50% 50%,rgba(77,168,218,0.13) 0%,transparent 68%);border-radius:28px;"></div>
         <!-- Top-right corner bracket -->
@@ -398,23 +410,8 @@
   </div>
 </section>
 
-<!-- Add responsive two-col hero at md+ -->
-<style>
-  @media (min-width: 768px) {
-    #hero-grid { grid-template-columns: 1fr 1fr !important; gap: 72px !important; padding-left: 32px !important; padding-right: 32px !important; }
-    #hero-section { padding-left: 32px !important; padding-right: 32px !important; }
-  }
-</style>
+<!-- Hero responsive handled via .hero-grid class in main <style> -->
 
-<script>
-  // Apply responsive hero grid
-  (function() {
-    var section = document.querySelector('section[style*="100px 16px"]');
-    var grid = section && section.querySelector('[style*="grid-template-columns:1fr;"]');
-    if (section) section.id = 'hero-section';
-    if (grid) grid.id = 'hero-grid';
-  })();
-</script>
 
 <!-- TRUSTED BY -->
 <section style="padding:37px 16px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--secondary);">
@@ -574,7 +571,7 @@
           I built a remediation company from the ground up, starting with no website, CRM, team, or processes. Within 30 days, I developed the operational infrastructure, launched the business, and secured its first paying client. One year later, the company crossed $1 million in revenue.
         </p>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="case-study-detail-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
           <div style="position:relative;overflow:hidden;background:rgba(77,168,218,0.04);border:1px solid rgba(77,168,218,0.1);border-radius:10px;padding:8px 12px;transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='rgba(45,139,181,0.4)';this.style.boxShadow='0 6px 28px rgba(45,139,181,0.14)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(77,168,218,0.1)';this.style.boxShadow='none';this.style.transform='translateY(0)'">
             <div style="position:absolute;top:-4px;right:8px;font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:rgba(77,168,218,0.07);line-height:1;pointer-events:none;user-select:none;">01</div>
             <div style="font-size:0.875rem;font-weight:600;color:var(--foreground);margin-bottom:2px;">Website Built from Scratch</div>
@@ -638,16 +635,18 @@
           <span class="pill-text">BACKGROUND</span>
         </div>
         <h2 style="font-size:clamp(2rem,4vw,2.9rem);margin-bottom:28px;">About <span class="text-gradient" style="--underline-delay:0.3s">Daniel</span></h2>
-        <p style="color:var(--muted);margin-bottom:18px;line-height:1.8;">Daniel C. Levy is an experienced business leader with a background in finance, telecommunications, and entrepreneurship. He graduated with honors from Baruch College, earning a degree in Finance and Investments.</p>
-        <p style="color:var(--muted);margin-bottom:18px;line-height:1.8;">Daniel began his career as an intern at a national telecommunications company and rose to become Vice President of Sales. In that role, he helped build the company's sales organization and played a key part in generating tens of millions of dollars in revenue. He continues to serve in this position today.</p>
-        <p style="color:var(--muted);margin-bottom:18px;line-height:1.8;">Alongside his corporate career, Daniel founded a consulting practice focused on helping business owners scale their companies strategically and sustainably. He has also built and successfully exited his own brick-and-mortar business, giving him firsthand experience as both an operator and an advisor.</p>
+        <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;">
+          <p style="color:var(--muted);line-height:1.8;">Daniel C. Levy is an experienced business leader with a background in finance, telecommunications, and entrepreneurship. He graduated with honors from Baruch College, earning a degree in Finance and Investments.</p>
+          <p style="color:var(--muted);line-height:1.8;">Daniel began his career as an intern at a national telecommunications company and rose to become Vice President of Sales. In that role, he helped build the company's sales organization and played a key part in generating tens of millions of dollars in revenue. He continues to serve in this position today.</p>
+          <p style="color:var(--muted);line-height:1.8;">Alongside his corporate career, Daniel founded a consulting practice focused on helping business owners scale their companies strategically and sustainably. He has also built and successfully exited his own brick-and-mortar business, giving him firsthand experience as both an operator and an advisor.</p>
+        </div>
         <button class="btn-primary" style="padding:14px 28px;font-size:0.95rem;border-radius:10px;">
           Speak with Daniel &nbsp;→
         </button>
       </div>
 
       <!-- Right: credential timeline -->
-      <div style="position:relative;padding-left:24px;">
+      <div class="about-timeline" style="position:relative;padding-left:24px;">
         <!-- Vertical spine -->
         <div style="position:absolute;left:0;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,rgba(77,168,218,0.5),rgba(77,168,218,0.15) 90%,transparent);"></div>
 
@@ -699,7 +698,7 @@
 
 <!-- FOOTER -->
 <footer style="border-top:1px solid var(--border);padding:44px 16px;background:var(--secondary);">
-  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
+  <div class="footer-inner" style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;">
     <div style="display:flex;align-items:center;gap:10px;">
       <img src="Dan.jpeg" alt="Daniel C. Levy" style="width:34px;height:34px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid var(--border);flex-shrink:0;">
       <span style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--foreground);">Daniel C. Levy</span>
@@ -741,25 +740,7 @@
     });
   });
 
-  // Responsive hero grid
-  function applyHeroLayout() {
-    const section = document.querySelector('section[style*="100px 16px"]');
-    const grid = section && section.querySelector('[style*="grid-template-columns:1fr;"]');
-    if (!grid) return;
-    if (window.innerWidth >= 768) {
-      grid.style.gridTemplateColumns = '1fr 1fr';
-      grid.style.gap = '72px';
-      section.style.paddingLeft = '32px';
-      section.style.paddingRight = '32px';
-    } else {
-      grid.style.gridTemplateColumns = '1fr';
-      grid.style.gap = '48px';
-      section.style.paddingLeft = '16px';
-      section.style.paddingRight = '16px';
-    }
-  }
-  applyHeroLayout();
-  window.addEventListener('resize', applyHeroLayout);
+  // Hero responsive layout handled by CSS .hero-grid class
 
   // Step node <-> card hover linking
   const nodes = document.querySelectorAll('.step-node');
