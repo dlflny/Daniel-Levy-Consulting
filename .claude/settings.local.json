@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(lsof -ti:3000)",
+      "Bash(node \"/Users/homework/Desktop/Website Folder/screenshot.mjs\" http://localhost:3000 hero)",
+      "Read(//usr/local/bin/**)",
+      "Bash(command -v node)",
+      "Bash(/usr/local/bin/node \"/Users/homework/Desktop/Website Folder/screenshot.mjs\" http://localhost:3000 hero)",
+      "Bash(/usr/local/bin/node -e \"require\\(''puppeteer''\\); console.log\\(''found''\\)\")",
+      "Bash(/usr/local/bin/node -e \"require\\(''puppeteer-core''\\); console.log\\(''found core''\\)\")",
+      "Bash(/usr/local/bin/node -e \"const {execSync}=require\\(''child_process''\\);execSync\\(''npm install puppeteer'',{stdio:''inherit'',cwd:process.cwd\\(\\)}\\)\")",
+      "Bash(/usr/local/bin/node -e \"const d=require\\(''fs''\\).readFileSync\\(''/dev/stdin'',''utf8''\\); const p=JSON.parse\\(d\\); console.log\\(''main:'',p.main,''exports:'',JSON.stringify\\(p.exports&&p.exports[''.''],null,2\\).slice\\(0,300\\)\\)\")"
+    ]
+  }
+}
