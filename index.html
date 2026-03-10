@@ -280,6 +280,21 @@
     }
     .section-header p { color: var(--muted); max-width: 520px; }
 
+    /* Responsive grids — defined here so they reliably override inline styles */
+    .services-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .results-stats-grid { display: grid; grid-template-columns: 1fr; gap: 18px; }
+    .step-connector-row { display: none; }
+    .about-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: start; }
+    .case-study-logo-wrap { margin-bottom: 16px; }
+    @media (min-width: 768px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+      .results-stats-grid { grid-template-columns: repeat(3, 1fr); }
+      .step-connector-row { display: block; }
+      .about-grid { grid-template-columns: 1fr 1fr; gap: 72px; }
+      .case-study-logo-wrap { position: absolute; top: 24px; right: 24px; margin-bottom: 0; }
+      .case-study-logo-wrap img { height: 120px; }
+    }
+
   </style>
 </head>
 <body>
@@ -455,7 +470,7 @@
     </div>
 
     <!-- Step connector: hidden on mobile, visible on md+ -->
-    <div style="position:relative;height:52px;margin-bottom:28px;display:none;" class="step-connector-row">
+    <div style="position:relative;height:52px;margin-bottom:28px;" class="step-connector-row">
       <div style="position:absolute;top:50%;left:0;right:0;height:1px;transform:translateY(-50%);background:linear-gradient(90deg,rgba(77,168,218,0.12),rgba(77,168,218,0.35) 20%,rgba(77,168,218,0.35) 80%,rgba(77,168,218,0.12));"></div>
       <div class="step-node" data-step="1" style="position:absolute;top:50%;left:0%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--background);border:1.5px solid rgba(77,168,218,0.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.65rem;font-weight:700;color:var(--muted);">01</div>
       <div class="step-node" data-step="2" style="position:absolute;top:50%;left:20%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--background);border:1.5px solid rgba(77,168,218,0.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.65rem;font-weight:700;color:var(--muted);">02</div>
@@ -465,14 +480,7 @@
       <div class="step-node" data-step="6" style="position:absolute;top:50%;left:100%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:var(--background);border:1.5px solid rgba(77,168,218,0.25);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:0.65rem;font-weight:700;color:var(--muted);">06</div>
     </div>
 
-    <style>
-      @media (min-width: 768px) {
-        .step-connector-row { display: block !important; }
-        .services-grid { grid-template-columns: repeat(3, 1fr) !important; }
-      }
-    </style>
-
-    <div class="services-grid" style="display:grid;grid-template-columns:1fr;gap:18px;">
+    <div class="services-grid">
       <div class="card" data-step="1" style="position:relative;overflow:hidden;padding:28px 26px;">
         <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#4da8da,#38bdf8,transparent);"></div>
         <div style="position:absolute;top:-8px;right:14px;font-family:'Playfair Display',serif;font-size:4.5rem;font-weight:700;color:rgba(77,168,218,0.07);line-height:1;pointer-events:none;user-select:none;">01</div>
@@ -548,23 +556,9 @@
       <div style="padding:24px 24px 24px 32px;">
         <div style="position:absolute;top:0;right:0;width:380px;height:380px;background:radial-gradient(circle,rgba(77,168,218,0.05) 0%,transparent 70%);pointer-events:none;"></div>
         <!-- Logo: static on mobile, absolute on desktop -->
-        <div class="case-study-logo-wrap" style="margin-bottom:16px;">
+        <div class="case-study-logo-wrap">
           <img src="logo-blue-bg-2-300x180.jpg" alt="FCR Logo" style="height:80px;width:auto;max-width:100%;object-fit:contain;opacity:0.9;mix-blend-mode:multiply;" />
         </div>
-        <style>
-          @media (min-width: 768px) {
-            .case-study-logo-wrap {
-              position: absolute !important;
-              top: 24px !important;
-              right: 24px !important;
-              margin-bottom: 0 !important;
-            }
-            .case-study-logo-wrap img {
-              height: 120px !important;
-            }
-            .case-study-inner { padding: 36px 36px 36px 44px !important; }
-          }
-        </style>
         <div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:24px;flex-wrap:wrap;">
           <div style="width:44px;height:44px;flex-shrink:0;background:linear-gradient(135deg,rgba(77,168,218,0.15),rgba(56,189,248,0.06));border:1px solid rgba(77,168,218,0.25);border-radius:11px;display:flex;align-items:center;justify-content:center;">
             <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#4da8da" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
@@ -605,12 +599,7 @@
     </div>
 
     <!-- Hero Stats -->
-    <div class="results-stats-grid" style="display:grid;grid-template-columns:1fr;gap:18px;">
-      <style>
-        @media (min-width: 768px) {
-          .results-stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
-        }
-      </style>
+    <div class="results-stats-grid">
       <div class="card" style="border-radius:20px;padding:28px 24px;">
         <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#4da8da,#38bdf8,transparent);"></div>
         <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Starting Point</div>
@@ -639,12 +628,7 @@
   <div style="position:absolute;top:-10%;right:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(77,168,218,0.06) 0%,transparent 65%);pointer-events:none;"></div>
   <div style="position:absolute;bottom:-15%;left:-8%;width:500px;height:500px;background:radial-gradient(circle,rgba(56,189,248,0.04) 0%,transparent 65%);pointer-events:none;"></div>
   <div class="section-inner">
-    <div class="about-grid" style="display:grid;grid-template-columns:1fr;gap:48px;align-items:start;">
-      <style>
-        @media (min-width: 768px) {
-          .about-grid { grid-template-columns: 1fr 1fr !important; gap: 72px !important; }
-        }
-      </style>
+    <div class="about-grid">
 
       <!-- Left: text -->
       <div>
